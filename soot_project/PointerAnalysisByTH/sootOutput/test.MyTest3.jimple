@@ -1,0 +1,139 @@
+public class test.MyTest3 extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        test.MyTest3 r0;
+
+        r0 := @this: test.MyTest3;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] r0;
+        test.MyNode r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, r16, r17, r18, r19, r20, r21, r22;
+        int i0;
+
+        r0 := @parameter0: java.lang.String[];
+
+        r16 = null;
+
+        i0 = 0;
+
+     label1:
+        if i0 >= 10 goto label2;
+
+        staticinvoke <benchmark.internal.Benchmark: void alloc(int)>(1);
+
+        $r15 = new test.MyNode;
+
+        specialinvoke $r15.<test.MyNode: void <init>()>();
+
+        r1 = $r15;
+
+        r1.<test.MyNode: int value> = i0;
+
+        r1.<test.MyNode: test.MyNode next> = r16;
+
+        r16 = r1;
+
+        i0 = i0 + 1;
+
+        goto label1;
+
+     label2:
+        staticinvoke <benchmark.internal.Benchmark: void alloc(int)>(2);
+
+        $r2 = new test.MyNode;
+
+        specialinvoke $r2.<test.MyNode: void <init>()>();
+
+        r17 = $r2;
+
+        r17.<test.MyNode: int value> = -100;
+
+        r17.<test.MyNode: test.MyNode next> = r16;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(1, r16);
+
+        $r3 = r16.<test.MyNode: test.MyNode next>;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(2, $r3);
+
+        $r4 = r16.<test.MyNode: test.MyNode next>;
+
+        $r5 = $r4.<test.MyNode: test.MyNode next>;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(3, $r5);
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(4, r17);
+
+        $r6 = r17.<test.MyNode: test.MyNode next>;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(5, $r6);
+
+        $r7 = r17.<test.MyNode: test.MyNode next>;
+
+        $r8 = $r7.<test.MyNode: test.MyNode next>;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(6, $r8);
+
+        staticinvoke <benchmark.internal.Benchmark: void alloc(int)>(10);
+
+        $r9 = new test.MyNode;
+
+        specialinvoke $r9.<test.MyNode: void <init>()>();
+
+        r18 = $r9;
+
+        r18.<test.MyNode: int value> = 10;
+
+        r18.<test.MyNode: test.MyNode next> = null;
+
+        staticinvoke <benchmark.internal.Benchmark: void alloc(int)>(20);
+
+        $r10 = new test.MyNode;
+
+        specialinvoke $r10.<test.MyNode: void <init>()>();
+
+        r19 = $r10;
+
+        r19.<test.MyNode: int value> = 20;
+
+        r19.<test.MyNode: test.MyNode next> = r18;
+
+        r20 = r19;
+
+        staticinvoke <benchmark.internal.Benchmark: void alloc(int)>(30);
+
+        $r11 = new test.MyNode;
+
+        specialinvoke $r11.<test.MyNode: void <init>()>();
+
+        r21 = $r11;
+
+        r21.<test.MyNode: int value> = 30;
+
+        r21.<test.MyNode: test.MyNode next> = r20;
+
+        r22 = r21;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(10, r22);
+
+        $r12 = r22.<test.MyNode: test.MyNode next>;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(20, $r12);
+
+        $r13 = r22.<test.MyNode: test.MyNode next>;
+
+        $r14 = $r13.<test.MyNode: test.MyNode next>;
+
+        staticinvoke <benchmark.internal.Benchmark: void test(int,java.lang.Object)>(30, $r14);
+
+        return;
+    }
+}
