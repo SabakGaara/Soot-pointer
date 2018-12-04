@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="analysis">
+    <output-path>$PROJECT_DIR$/sootOutput/artifacts/analysis</output-path>
+    <root id="archive" name="analysis.jar">
+      <element id="extracted-dir" path="$PROJECT_DIR$/PointerAnalysisByTH/soot-trunk.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/PointerAnalysisByTH/soot-trunk.jar" />
+    </root>
+  </artifact>
+</component>

@@ -221,25 +221,37 @@ public class Analysis extends ForwardFlowAnalysis {
 
                         Set<String> arraySet = new HashSet<String>();
                         if (in.containsKey(arrayName)){
-                            arraySet = in.get(arrayName);
-                            for (String array:arraySet){
-                                if (array.contains("unknown")) {
-                                    continue;
-                                }
-                                String arrayRef = "AR"+array+".ID"+arrayIndex;
-                                if (arraySet.size()==1){
+//                            arraySet = in.get(arrayName);
+                            String arrayRef = "AR"+rbase.getName()+".ID"+arrayIndex;
+                            if (!in.containsKey(arrayRef)){
+                                out.put(arrayRef, rVal);
+//                                out.get(arrayName).addAll(rVal);
+                            }else{
+                                arraySet = in.get(arrayRef);
+                                if (arraySet.size() == 1){
                                     out.put(arrayRef, rVal);
+//                                    out.get(arrayName).addAll(rVal);
                                 }else{
-                                    if (out.containsKey(arrayRef)){
-                                        out.get(arrayRef).addAll(rVal);
-                                    }else{
-                                        out.put(arrayRef, rVal);
-                                    }
+                                    out.get(arrayRef).addAll(rVal);
+//                                    out.get(arrayName).addAll(rVal);
                                 }
                             }
-
-                        }else{
-                            out.put("AR"+rbase.getName()+".ID"+arrayIndex, rVal);
+//                            for (String array:arraySet){
+//                                if (array.contains("unknown")) {
+//                                    continue;
+//                                }
+//                                String arrayRef = "AR"+rbase.getName()+".ID"+arrayIndex;
+//                                if (arraySet.size()==1){
+//                                    out.put(arrayRef, rVal);
+//                                }else{
+//                                    if (out.containsKey(arrayRef)){
+//                                        out.get(arrayRef).addAll(rVal);
+//                                    }else{
+//                                        out.put(arrayRef, rVal);
+//                                    }
+//                                }
+//                            }
+//                            out.get(arrayName).addAll(rVal);
                         }
 
                     }
@@ -256,8 +268,8 @@ public class Analysis extends ForwardFlowAnalysis {
                 if (allocId != 0){
                     rVal.add(Integer.toString(allocId));
                     allocId = 0;
-                }else{
-                    rVal.add("unknown");
+                } else{
+
                 }
             } else if (rop instanceof Constant) {
                 // 测评不需要处理非引用类型
@@ -306,19 +318,13 @@ public class Analysis extends ForwardFlowAnalysis {
                 if (rref.getIndex() instanceof IntConstant) {
                     String arrayIndex = Integer.toString(((IntConstant) rref.getIndex()).value);
                     if (in.containsKey(arrayName)){
-                        Set<String> arraySet = new HashSet<String>();
-                        arraySet = in.get(arrayName);
-                        for (String array:arraySet){
-                            if (array.contains("unknown")){
-                                rVal.add("unknown");
-                                continue;
-                            }
-                            if (in.containsKey("AR"+array+".ID"+arrayIndex)){
-                                rVal.addAll(in.get("AR"+array+".ID"+arrayIndex));
-                            }else{
-                                rVal.addAll(arraySet);
-                            }
+
+                        if (in.containsKey("AR"+rbase.getName()+".ID"+arrayIndex)){
+                            rVal.addAll(in.get("AR"+rbase.getName()+".ID"+arrayIndex));
+                        }else{
+                            rVal.add("unknown");
                         }
+
                     }
                 }
             } else if (rop instanceof InvokeExpr){
@@ -371,30 +377,41 @@ public class Analysis extends ForwardFlowAnalysis {
 
                         Set<String> arraySet = new HashSet<String>();
                         if (in.containsKey(arrayName)){
-                            arraySet = in.get(arrayName);
-                            for (String array:arraySet){
-                                if (array.contains("unknown")){
-                                    continue;
-                                }
-                                String arrayRef = "AR"+array+".ID"+arrayIndex;
-                                if (arraySet.size()==1){
+//                            arraySet = in.get(arrayName);
+                            String arrayRef = "AR"+rbase.getName()+".ID"+arrayIndex;
+                            if (!in.containsKey(arrayRef)){
+                                out.put(arrayRef, rVal);
+//                                out.get(arrayName).addAll(rVal);
+                            }else{
+                                arraySet = in.get(arrayRef);
+                                if (arraySet.size() == 1){
                                     out.put(arrayRef, rVal);
+//                                    out.get(arrayName).addAll(rVal);
                                 }else{
-                                    if (out.containsKey(arrayRef)){
-                                        out.get(arrayRef).addAll(rVal);
-                                    }else{
-                                        out.put(arrayRef, rVal);
-                                    }
+                                    out.get(arrayRef).addAll(rVal);
+//                                    out.get(arrayName).addAll(rVal);
                                 }
                             }
-
-                        }else{
-                            out.put("AR"+rbase.getName()+".ID"+arrayIndex, rVal);
+//                            for (String array:arraySet){
+//                                if (array.contains("unknown")) {
+//                                    continue;
+//                                }
+//                                String arrayRef = "AR"+rbase.getName()+".ID"+arrayIndex;
+//                                if (arraySet.size()==1){
+//                                    out.put(arrayRef, rVal);
+//                                }else{
+//                                    if (out.containsKey(arrayRef)){
+//                                        out.get(arrayRef).addAll(rVal);
+//                                    }else{
+//                                        out.put(arrayRef, rVal);
+//                                    }
+//                                }
+//                            }
+//                            out.get(arrayName).addAll(rVal);
                         }
 
                     }
                 } else {
-                    // 其他左值
                 }
             }
         } else if (u instanceof ReturnStmt || u instanceof ReturnVoidStmt) {
@@ -426,8 +443,6 @@ public class Analysis extends ForwardFlowAnalysis {
                 AnswerPrinter.printAnswer(strAnswer);
             }
 
-        } else {
-            System.out.println("!!! " +methodName+ " Unit unknown: " + u.getClass().getName() + " [" + u.toString() + "]");
         }
     }
 
